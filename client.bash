@@ -7,12 +7,6 @@ SSH_OPTIONS=(
 set -o nounset
 set -e
 
-if type pv > /dev/null; then
-    INCMD=( pv --width=80 )
-else
-    INCMD=( cat )
-fi
-
 usage() {
     echo "Usage: ${0} </file/to/upload>"
 }
@@ -20,6 +14,14 @@ usage() {
 if [[ "${#@}" -ne 1 ]]; then
     usage
     exit 1
+fi
+
+if [[ "${1}" =~ ^https?:// ]]; then
+    INCMD=( curl )
+elif type pv > /dev/null; then
+    INCMD=( pv --width=80 )
+else
+    INCMD=( cat )
 fi
 
 "${INCMD[@]}" "${1}" | ssh "${SSH_OPTIONS[@]}" "${1}"
