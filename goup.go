@@ -42,7 +42,7 @@ func main() {
 		log.Fatalln("Error renaming temporary file:", err)
 	}
 
-	filename += "." + strconv.FormatInt(time.Now().UnixNano(), 16)
+	filename = strconv.FormatInt(time.Now().UnixNano(), 16) + "." + filename
 	nameLink := path.Join(config.NamesDir, filename)
 
 	err = os.Symlink(dest, nameLink)
