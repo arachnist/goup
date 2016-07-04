@@ -1,0 +1,5 @@
+---
+files_dir: "/home/arachnist/public_html/c"
+names_dir: "/home/arachnist/public_html/n"
+files_url_base: "http://arachnist.is-a.cat/c"
+names_url_base: "http://arachnist.is-a.cat/n"
