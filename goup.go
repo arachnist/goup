@@ -32,6 +32,9 @@ func main() {
 
 	multi := io.MultiWriter(hash, temp)
 	_, err = io.Copy(multi, os.Stdin)
+	if err != nil {
+		log.Fatalln("Error reading from stdin:", err)
+	}
 
 	destFile := fmt.Sprintf("%x%s", hash.Sum(nil), ext)
 	dest := path.Join(config.FilesDir, destFile)
