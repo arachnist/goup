@@ -11,7 +11,11 @@ usage() {
     echo "Usage: ${0} </file/to/upload>"
 }
 
-if [[ "${#@}" -ne 1 ]]; then
+if [[ "${#@}" -eq 2 ]]; then
+    filename="${2}"
+elif [[ "${#@}" -eq 1 ]]; then
+    filename="${1}"
+else
     usage
     exit 1
 fi
@@ -24,4 +28,4 @@ else
     INCMD=( cat )
 fi
 
-"${INCMD[@]}" "${1}" | ssh "${SSH_OPTIONS[@]}" "${1}"
+"${INCMD[@]}" "${1}" | ssh "${SSH_OPTIONS[@]}" "${filename}"
